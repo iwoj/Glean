@@ -20,7 +20,7 @@ fs.readFile('../Source Code/bookmarklet.txt', function(err,data){
     // Remove whitespace, encode URI characters and prepend javascript link code.
     var bookmarkletURL = "javascript:" + escape(data.toString().replace(/\s+/g," "));
 
-    fs.writeFile('../Build/bookmarklet.html', bookmarkletURL, function(err){
+    fs.writeFile('../Build Products/bookmarklet.html', bookmarkletURL, function(err){
       if(err) {
         console.error("Could not write to file: %s", err);
         process.exit(1);
