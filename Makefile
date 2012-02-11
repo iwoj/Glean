@@ -1,8 +1,11 @@
-all:
-	#NODE_PATH=Libraries:$(NODE_PATH):Libraries
-	cd Scripts; \
-	node package_bookmarklet.js
-	cp "Source Code/lamprey.js" "Build Products/"
+PRODUCTION_URL="http://woj.com/lamprey"
+TESTING_URL="http://lamprey"
 
-deploy:
+all:
+	cd Scripts; \
+	node build.js $(TESTING_URL)
+	cp "Source Code/lamprey.css" "Build Products"
+
+deploy: all
 	cp "Build Products/"* Website/
+
