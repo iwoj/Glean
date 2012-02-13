@@ -16,7 +16,7 @@ fs.readFile('../Source Code/bookmarklet.js', function(err,bookmarkletCode){
     process.exit(1);
   }
   
-  fs.readFile('../Source Code/example.html', function(err,htmlPage){
+  fs.readFile('../Source Code/bookmarklet.html', function(err,htmlPage){
     if(err) {
       console.error("Could not open file: %s", err);
       process.exit(1);
@@ -46,23 +46,23 @@ fs.readFile('../Source Code/bookmarklet.js', function(err,bookmarkletCode){
 });
 
 
-// ------------------------------
-// lamprey.js
-fs.readFile('../Source Code/lamprey.js', function(err,htmlPage){
-  if(err) {
-    console.error("Could not open file: %s", err);
-    process.exit(1);
-  }
-  
-  // Put it into the template.
-  var renderedHTML = _.template(htmlPage.toString(), { baseURL: baseURL });
-  
-  fs.writeFile('../Build Products/lamprey.js', renderedHTML, function(err){
-    if(err) {
-      console.error("Could not write to file: %s", err);
-      process.exit(1);
-    }
-  });
-
-  console.log("Built lamprey.js");
-});
+// // ------------------------------
+// // lamprey.js
+// fs.readFile('../Source Code/lamprey.js', function(err,htmlPage){
+//   if(err) {
+//     console.error("Could not open file: %s", err);
+//     process.exit(1);
+//   }
+//   
+//   // Put it into the template.
+//   var renderedHTML = _.template(htmlPage.toString(), { baseURL: baseURL });
+//   
+//   fs.writeFile('../Build Products/lamprey.js', renderedHTML, function(err){
+//     if(err) {
+//       console.error("Could not write to file: %s", err);
+//       process.exit(1);
+//     }
+//   });
+// 
+//   console.log("Built lamprey.js");
+// });
