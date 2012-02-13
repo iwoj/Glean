@@ -63,5 +63,26 @@
   font-family: Helvetica, Arial, sans-serif;
   opacity: 0.33;
   padding-top: 5px;
+  display: none;
 }
 
+#lamprey-footer button {
+      display:inline;
+      margin:0 7px 0 0;
+      background-color:#ddd;
+      border:1px solid #aaa;
+      border-top:1px solid #fff;
+      border-left:1px solid #fff;
+
+      font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+      font-size:12px;
+      line-height:130%;
+      text-decoration:none;
+      font-weight:normal;
+      color:#565656;
+      cursor:pointer;
+      padding: 4px 10px 5px 10px; /* Links */
+      
+      width:auto;
+      overflow:visible;
+}

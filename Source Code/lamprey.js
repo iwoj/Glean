@@ -15,11 +15,11 @@ function initLamprey() {
     $('body').append(_.template(data.toString(), {}));
     $('#lamprey').animate({
         right: '0'
-      }, 500);
+      }, 250);
     $("#lamprey-cancel").click(function () {
       $('#lamprey').animate({
           right: '-' + $("#lamprey").outerWidth()
-        }, 500, function () {
+        }, 250, function () {
           $('#lamprey').remove();
         });
     });
