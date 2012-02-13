@@ -1,11 +1,13 @@
 #lamprey {
-  position: absolute;
+  font-family: Helvetica, Arial, sans-serif;
+  position: fixed;
+  text-align: left;
   top: 0px;
   right: -200px;
   z-index: 1000;
   width: 250px;
   height: 100%;
-  background-color: yellow;
+  background-color: #ff8;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-right: 10px;
@@ -14,25 +16,45 @@
 
 #lamprey h1 {
   float: left;
+  display: inline;
   font-size: 16px;
+  padding: 0px;
+  margin: 0px;
   padding-bottom: 5px;
 }
 
 #lamprey h2 {
   float: right;
+  display: inline;
   opacity: 0.33;
   font-size: 16px;
+  padding: 0px;
+  margin: 0px;
   padding-bottom: 5px;
 }
 
 #lamprey textarea {
-  width: 100%;
-  height: 25%;
+  width: 245px;
   margin-bottom: 10px;
 }
 
+#lamprey-regex {
+  height: 100px;
+  background-color: #fff;
+}
+
+#lamprey-html {
+  height: 200px;
+  background-color: #ffc;
+}
+
 #lamprey-thoreau {
+  position: absolute;
+  bottom: 20px;
+  padding: 0px;
+  margin: 0px;
   font-size: 12px;
+  font-style: italic;
   font-family: Helvetica, Arial, sans-serif;
   opacity: 0.33;
 }
