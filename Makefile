@@ -7,9 +7,12 @@ DEPLOYMENT_DIR="Website"
 all:
 	cd Scripts; \
 	node build.js $(TESTING_URL)
-	cp "Source Code/lamprey."* "Build Products"
-
+	cp "Source Code/lamprey.css" "Build Products"
+	cp "Source Code/lamprey.html" "Build Products"
+	cp "Source Code/.htaccess" "Build Products"
+	
 deploy: all
+	cp "Build Products/.htaccess" $(DEPLOYMENT_DIR)
 	cp "Build Products/"* $(DEPLOYMENT_DIR)
 	cp Libraries/* $(DEPLOYMENT_DIR)
 
