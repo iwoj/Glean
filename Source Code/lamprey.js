@@ -10,15 +10,22 @@ window.Lamprey.bootstrapper.loadScripts([
 function initLamprey() {
   // Load CSS
   $("head").append('<link type="text/css" rel="stylesheet" media="all" href="' + baseURL + '/lamprey.css" />');
-  // document.getElementsByTagName('head')[0].innerHTML += ('<link type="text/css" rel="stylesheet" media="all" href="' + baseURL + '/lamprey.css" />');
-  $.get(baseURL + "/lamprey.html", function(data) {
+  
+  $.get(baseURL + "/lamprey.html", function (data) {
     $('body').append(_.template(data.toString(), {}));
     $('body').css('overflow', 'hidden');
     $('#lamprey').animate({
         right: '0'
-      }, 500, function() {
-        // Animation complete.
-      });
+      }, 500);
+    $("#lamprey-cancel").click(function () {
+      $('#lamprey').animate({
+          right: '-' + $("#lamprey").outerWidth()
+        }, 500, function () {
+          $('#lamprey').remove();
+        });
+    });
   })
-  .error(function() { alert("Error loading Lamprey UI.")});
+  .error(function () { alert("Error loading Lamprey UI.")});
 }
+
+
