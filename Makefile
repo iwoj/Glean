@@ -12,6 +12,7 @@ all:
 	cp "Source Code/.htaccess" "Build Products"
 	
 deploy: all
+	mkdir -p $(DEPLOYMENT_DIR)
 	cp "Build Products/.htaccess" $(DEPLOYMENT_DIR)
 	cp "Build Products/"* $(DEPLOYMENT_DIR)
 	cp Libraries/* $(DEPLOYMENT_DIR)
