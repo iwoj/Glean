@@ -13,7 +13,6 @@ function initLamprey() {
   
   $.get(baseURL + "/lamprey.html", function (data) {
     $('body').append(_.template(data.toString(), {}));
-    $('body').css('overflow', 'hidden');
     $('#lamprey').animate({
         right: '0'
       }, 500);
@@ -24,8 +23,74 @@ function initLamprey() {
           $('#lamprey').remove();
         });
     });
+    $(document).mouseup(function(event) {
+      if (!$("#lamprey").has(event.target).length) {
+        checkSelection();
+      }
+    });
+    checkSelection();
   })
   .error(function () { alert("Error loading Lamprey UI.")});
+}
+
+
+function checkSelection() {
+  var selection = getSelectionText();
+  if (selection != "") {
+    var selectionHTML = getSelectionHTML();
+    $("#lamprey-regex").text("/" + selectionHTML + "/");
+    $("#lamprey-html").text(selectionHTML);
+  }
+}
+
+
+function getSelectionText() {
+    if (window.getSelection) {
+        return window.getSelection();
+        
+    // IE
+    } else if (document.selection) {
+        return document.selection.createRange();
+    }
+}
+
+
+
+function getSelectionHTML() {
+    if (document.selection && document.selection.createRange) return (document.selection.createRange()).htmlText;
+    if (window.getSelection) {
+        var sel = window.getSelection();
+        var html = "";
+        
+        // for (var i = 0; i < sel.rangeCount; i++) {
+        //     var d = document.createElement("span");
+        //     var r = sel.getRangeAt(i);
+        //     var parent_element = r.commonAncestorContainer;
+        //     var prev_html = parent_element.innerHTML;
+        //     r.surroundContents(d);
+        //     html += d.innerHTML;
+        //     parent_element.innerHTML = prev_html;
+        // }
+        
+        var range = sel.getRangeAt(0);
+        var startContainer = range.startContainer;
+        var spanNode = startContainer.ownerDocument.createElement("layer");
+        var docfrag = range.cloneContents();
+        spanNode.appendChild(docfrag);
+        //range.insertNode(spanNode);
+        html = trimOuterTags(spanNode.innerHTML);
+        $(spanNode).remove();
+        
+        return html;
+    }
+    return null;
+}
+
+
+function trimOuterTags(s) {
+  s = s.replace(/^(<[^>]*>)/, "");
+  s = s.replace(/(<[^>]*>)$/, "");
+  return s;
 }
 
 
