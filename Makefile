@@ -1,7 +1,9 @@
+# Edit these variables for your environment
 PRODUCTION_URL="http://woj.com/lamprey"
 TESTING_URL="http://lamprey"
 DEPLOYMENT_DIR="Website"
 
+# Best to leave this alone.
 all:
 	cd Scripts; \
 	node build.js $(TESTING_URL)
