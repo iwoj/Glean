@@ -55,7 +55,6 @@ function getSelectionText() {
 }
 
 
-
 function getSelectionHTML() {
     if (document.selection && document.selection.createRange) return (document.selection.createRange()).htmlText;
     if (window.getSelection) {

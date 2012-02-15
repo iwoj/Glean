@@ -5,7 +5,7 @@
   text-align: left;
   top: 0px;
   right: -200px;
-  z-index: 1000;
+  z-index: 2000002;
   width: 250px;
   height: 100%;
   background-color: #ff8;
@@ -32,6 +32,11 @@
   padding: 0px;
   margin: 0px;
   padding-bottom: 5px;
+}
+
+
+#lamprey-slogan a {
+  color: #000;
 }
 
 #lamprey textarea {
