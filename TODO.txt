@@ -1,3 +1,10 @@
-- Make version 1
-- Add function for publishing to ScraperWiki.com
+Version 1.0:
+- Set selection on regex update.
+
+Version 2.0:
+- Add dynamic URL functionality
+- Add function for publishing to ScraperWiki.com or another live location.
+
+Verison 3.0:
+- Add collections of regex's with monitoring, status indicators and service interruption notifications
 

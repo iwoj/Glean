@@ -33,12 +33,16 @@ function initLamprey() {
   .error(function () { alert("Error loading Lamprey UI.")});
 }
 
+function escapeRegEx(s) {
+    return s.replace(/[\[\]{}()*+?.,\\\/^$|#]/g, "\\$&");
+}
 
 function checkSelection() {
   var selection = getSelectionText();
   if (selection != "") {
+    $("#lamprey-instructions").fadeOut();
     var selectionHTML = getSelectionHTML();
-    $("#lamprey-regex").text("/" + selectionHTML + "/");
+    $("#lamprey-regex").text("/" + escapeRegEx(selectionHTML) + "/");
     $("#lamprey-html").text(selectionHTML);
   }
 }
