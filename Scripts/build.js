@@ -16,16 +16,15 @@ fs.readFile('../Source Code/bookmarklet.js', function(err,bookmarkletCode){
     process.exit(1);
   }
   
+  bookmarkletCode = _.template(bookmarkletCode.toString(), { baseURL: baseURL });
+  // Remove whitespace, encode URI characters, prepend javascript link code.
+  var bookmarkletJavaScriptLink = "javascript:" + escape(bookmarkletCode.toString().replace(/\s+/g," "));
+  
   fs.readFile('../Source Code/bookmarklet.html', function(err,htmlPage){
     if(err) {
       console.error("Could not open file: %s", err);
       process.exit(1);
     }
-    
-    bookmarkletCode = _.template(bookmarkletCode.toString(), { baseURL: baseURL });
-    
-    // Remove whitespace, encode URI characters, prepend javascript link code.
-    var bookmarkletJavaScriptLink = "javascript:" + escape(bookmarkletCode.toString().replace(/\s+/g," "));
     
     // Put it into the template.
     var renderedHTML = _.template(htmlPage.toString(), 

@@ -7,9 +7,18 @@ window.Lamprey.bootstrapper.loadScripts([
   ], initLamprey );
 
 
+function resize() {
+  var fixedHeightElementsTotalHeight = 200;
+  //$("#lamprey-instructions").is(":visible")
+  $("#lamprey-regex").height($(window).height()/2 - fixedHeightElementsTotalHeight);
+  $("#lamprey-html").height($(window).height()/2 - fixedHeightElementsTotalHeight);
+}
+
 function initLamprey() {
   // Load CSS
   $("head").append('<link type="text/css" rel="stylesheet" media="all" href="' + baseURL + '/lamprey.css" />');
+  
+//  resize();
   
   $.get(baseURL + "/lamprey.html", function (data) {
     $('body').append(_.template(data.toString(), {}));

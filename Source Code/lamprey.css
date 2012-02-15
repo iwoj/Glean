@@ -2,8 +2,6 @@
   font-family: Helvetica, Arial, sans-serif;
   font-size: 12px;
   color: black;
-  border: 2px;
-  border-color: black;
   position: fixed;
   text-align: left;
   top: 0px;
@@ -59,12 +57,12 @@
 
 
 #lamprey-regex {
-  height: 100px;
+  height: 35%;
   background-color: #fff;
 }
 
 #lamprey-html {
-  height: 200px;
+  height: 35%;
   background-color: #ffc;
 }
 

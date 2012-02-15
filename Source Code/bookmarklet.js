@@ -16,5 +16,5 @@
             };
         }
     };
-    window.Lamprey.bootstrapper.loadScripts([lampreyURL + "/lamprey.js?" + (new Date())], function () {});
+    window.Lamprey.bootstrapper.loadScripts([lampreyURL + "/lamprey.js?"]);
 })()

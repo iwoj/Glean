@@ -1,8 +1,10 @@
 Version 1.0:
 - Set selection on regex update.
+- Make wider aperture on nearby HTML.
 
 Version 2.0:
 - Add dynamic URL functionality
+- Save patterns.
 - Add function for publishing to ScraperWiki.com or another live location.
 
 Verison 3.0:
