@@ -1,6 +1,6 @@
 # Edit these variables for your environment
 PRODUCTION_URL="http://woj.com/lamprey"
-TESTING_URL="http://lamprey"
+TESTING_URL="http://woj/lamprey"
 DEPLOYMENT_DIR="Website"
 BUILD_OUTPUT="Build Products"
 
@@ -18,6 +18,8 @@ deploy: all
 	cp "Build Products/"* $(DEPLOYMENT_DIR)
 	cp "Build Products/.htaccess" $(DEPLOYMENT_DIR)
 	cp Libraries/* $(DEPLOYMENT_DIR)
+	cd $(DEPLOYMENT_DIR); \
+	ln -s -f bookmarklet.html index.html
 
 clean:
 	rm -rf $(BUILD_OUTPUT)/*

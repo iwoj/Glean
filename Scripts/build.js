@@ -9,7 +9,7 @@ if (process.argv[2])
   baseURL = process.argv[2];
 
 // ---------------------------------------
-// bookmarklet.html
+// bookmarklet
 fs.readFile('../Source Code/bookmarklet.js', function(err,bookmarkletCode){
   if(err) {
     console.error("Could not open file: %s", err);
@@ -20,6 +20,8 @@ fs.readFile('../Source Code/bookmarklet.js', function(err,bookmarkletCode){
   // Remove whitespace, encode URI characters, prepend javascript link code.
   var bookmarkletJavaScriptLink = "javascript:" + escape(bookmarkletCode.toString().replace(/\s+/g," "));
   
+  // ---------------------------------------
+  // bookmarklet.html
   fs.readFile('../Source Code/bookmarklet.html', function(err,htmlPage){
     if(err) {
       console.error("Could not open file: %s", err);
@@ -41,7 +43,35 @@ fs.readFile('../Source Code/bookmarklet.js', function(err,bookmarkletCode){
     });
     
     console.log("Built bookmarklet.html");
+    
   });
+  
+  
+  // ---------------------------------------
+  // README.md
+  fs.readFile('../Source Code/README.template', function(err,htmlPage){
+    if(err) {
+      console.error("Could not open file: %s", err);
+      process.exit(1);
+    }
+
+    // Put it into the template.
+    var renderedHTML = _.template(htmlPage.toString(), 
+                                  {
+                                    bookmarkletJavaScriptLink: bookmarkletJavaScriptLink, 
+                                    baseURL: baseURL
+                                  });
+
+    fs.writeFile('../README.md', renderedHTML, function(err){
+      if(err) {
+        console.error("Could not write to file: %s", err);
+        process.exit(1);
+      }
+    });
+
+    console.log("Built README.md");
+  });
+  
 });
 
 
