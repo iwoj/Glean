@@ -9,8 +9,9 @@ all:
 	mkdir -p $(BUILD_OUTPUT)
 	cd Scripts; \
 	node build.js $(TESTING_URL)
-	cp "Source Code/lamprey.css" $(BUILD_OUTPUT)
-	cp "Source Code/lamprey.html" $(BUILD_OUTPUT)
+	cp "Source Code/"*.css $(BUILD_OUTPUT)
+	cp "Source Code/"*.html $(BUILD_OUTPUT)
+	cp "Source Code/"*.jpg $(BUILD_OUTPUT)
 	cp "Source Code/.htaccess" $(BUILD_OUTPUT)
 	
 deploy: all
