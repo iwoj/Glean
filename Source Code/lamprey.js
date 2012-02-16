@@ -86,12 +86,12 @@ function getSelectionHTML() {
         if (arguments[0]["snapToParent"]) {
           // Set Expanded Range
           range2 = document.createRange();
-          range2.setStart(startContainer.parentNode, 0);
-          range2.setEnd(endContainer, endContainer.textContent.length);
+          range2.setStartBefore(startContainer.parentNode.parentNode, 0);
+          range2.setEndAfter(endContainer.parentNode.parentNode, endContainer.parentNode.parentNode.childNodes.length);
           sel.removeAllRanges();
           sel.addRange(range2);
           
-          var html = getHTMLFromRange(range2, true);
+          var html = getHTMLFromRange(range2, false);
           
           // Reset Selection
           range2.setStart(startContainer, startOffset);
@@ -102,22 +102,22 @@ function getSelectionHTML() {
           return html;
         }
         else {
-          return getHTMLFromRange(range, false);
+          return getHTMLFromRange(range, true);
         }
     }
     return null;
 }
 
 
-function getHTMLFromRange(range, outer) {
+function getHTMLFromRange(range, trim) {
   var spanNode = range.startContainer.ownerDocument.createElement("layer");
   var docfrag = range.cloneContents();
   spanNode.appendChild(docfrag);
   //range.insertNode(spanNode);
   var html;
-  outer ? html = spanNode.outerHTML : html = spanNode.innerHTML;
+  trim ? html = trimOuterTags(spanNode.innerHTML) : html = spanNode.innerHTML;
   $(spanNode).remove();
-  return trimOuterTags(html);
+  return html;
 }
 
 
