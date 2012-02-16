@@ -27,11 +27,13 @@
 
 #lamprey-slogan {
   float: right;
+  float: bottom;
   display: inline;
-  opacity: 0.5;
-  font-size: 10px;
+  opacity: 0.33;
+  font-size: 12px;
   padding: 0px;
   margin: 0px;
+  padding-top: 10px;
 }
 
 

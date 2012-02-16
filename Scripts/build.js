@@ -61,7 +61,7 @@ fs.readFile('../Source Code/bookmarklet.js', function(err,bookmarkletCode){
                                     bookmarkletJavaScriptLink: bookmarkletJavaScriptLink, 
                                     baseURL: baseURL
                                   });
-
+    
     fs.writeFile('../README.md', renderedHTML, function(err){
       if(err) {
         console.error("Could not write to file: %s", err);

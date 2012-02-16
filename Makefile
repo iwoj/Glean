@@ -7,12 +7,12 @@ BUILD_OUTPUT="Build Products"
 # Best to leave this alone.
 all:
 	mkdir -p $(BUILD_OUTPUT)
-	cd Scripts; \
-	node build.js $(TESTING_URL)
 	cp "Source Code/"*.css $(BUILD_OUTPUT)
 	cp "Source Code/"*.html $(BUILD_OUTPUT)
 	cp "Source Code/"*.jpg $(BUILD_OUTPUT)
 	cp "Source Code/.htaccess" $(BUILD_OUTPUT)
+	cd Scripts; \
+	node build.js $(TESTING_URL)
 	
 deploy: all
 	mkdir -p $(DEPLOYMENT_DIR)
@@ -25,3 +25,8 @@ deploy: all
 clean:
 	rm -rf $(BUILD_OUTPUT)/*
 	rm -rf $(BUILD_OUTPUT)/.htaccess
+
+clean-deployment:
+	rm -rf $(DEPLOYMENT_DIR)/*
+	rm -rf $(DEPLOYMENT_DIR)/.htaccess
+
