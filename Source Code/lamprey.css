@@ -58,13 +58,18 @@
 
 
 #lamprey-regex {
-  height: 35%;
+  height: 32%;
   background-color: #fff;
 }
 
 #lamprey-html {
-  height: 35%;
+  height: 32%;
   background-color: #ffc;
+}
+
+#lamprey-matching-groups {
+  height: 45px;
+  width: 245px;
 }
 
 #lamprey-footer {

@@ -58,6 +58,9 @@ function checkSelection() {
     $("#lamprey-regex").text("/" + regEx + "/");
     regEx.isMultiline ? $("#lamprey-regex").append("m") : true ;
     $("#lamprey-html").text(getSelectionHTML({snapToParent: true}));
+    $("#lamprey-matching-groups").html(
+      getSelectionHTML({snapToParent: false})
+    );
   }
 }
 
