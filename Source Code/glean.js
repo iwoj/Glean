@@ -58,6 +58,13 @@ function matchWebpage() {
   var html = document.documentElement.outerHTML;
   XRegExp.forEach(html, new RegExp(trimSlashes($("#glean-regex").text())), function(match, i) {
     if (DEBUG) console.log(match.index)
+    // Given the starting point (match.index), is this inside Glean's HTML?
+    // if yes:
+       // do nothing.
+    // else:
+       // translate the math.index to a selection range
+       // append the selection range to previous select ranges, if any exist
+       // set the selection.
   })
 }
 
