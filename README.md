@@ -12,4 +12,4 @@ To build and deploy a copy of Glean on your own server, type:
 
 And copy all the files from **Build Products** onto your webserver at the address you specified.
 
-Visit the [website](http://wojtowicz.com/glean) for more info.
+Visit the [website](http://miscellaneousprojects.com/glean) for more info.
