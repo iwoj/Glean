@@ -1,46 +1,30 @@
 var baseURL = "<%= baseURL %>";
 
-window.Lamprey.bootstrapper.loadScripts([
+window.Glean.bootstrapper.loadScripts([
     baseURL + "/jquery.min.js",
     baseURL + "/underscore-min.js", 
-    baseURL + "/backbone-min.js"
-  ], initLamprey );
+    baseURL + "/backbone-min.js",
+    baseURL + "/xregexp-min.js"
+  ], initGlean );
 
-function resize() {
-  var fixedHeightElementsTotalHeight = 200;
-  //$("#lamprey-instructions").is(":visible")
-  var windowHeight = $(window).height();
-  $("#lamprey-regex").height(windowHeight/2 - fixedHeightElementsTotalHeight);
-  $("#lamprey-html").height(windowHeight/2 - fixedHeightElementsTotalHeight);
-}
 
-function initLamprey() {
+
+function initGlean() {
   // Load CSS
-  $("head").append('<link type="text/css" rel="stylesheet" media="all" href="' + baseURL + '/lamprey.css" />');
+  $("head").append('<link type="text/css" rel="stylesheet" media="all" href="' + baseURL + '/glean.css" />');
   
-  // resize();
-  
-  $.get(baseURL + "/lamprey.html", function (data) {
+  // Load HTML and open tray
+  $.get(baseURL + "/glean.html", function (data) {
     $('body').append(_.template(data.toString(), {}));
-    $('#lamprey').animate({
-        right: '0'
-      }, 250);
-    $("#lamprey-cancel").click(function () {
-      $('#lamprey').animate({
-          right: '-' + $("#lamprey").outerWidth()
-        }, 250, function () {
-          $('#lamprey').remove();
-        });
-    });
-    $(document).mouseup(function(event) {
-      if (!$("#lamprey").has(event.target).length) {
-        checkSelection();
-      }
-    });
+    
+    registerEvents();
+    openTray();
     checkSelection();
   })
-  .error(function () { alert("Error loading Lamprey UI.")});
+  .error(function () { alert("Error loading Glean UI.")});
 }
+
+
 
 function escapeRegEx(s) {
   s = s.replace(/[\[\]{}()*+?.\\\/^$|#]/g, "\\$&");
@@ -50,19 +34,32 @@ function escapeRegEx(s) {
   return s;
 }
 
+
+
 function checkSelection() {
   var selection = getSelectionText();
   if (selection != "") {
-    $("#lamprey-instructions").fadeOut();
+    $("#glean-instructions").fadeOut();
     var regEx = escapeRegEx(getSelectionHTML(0));
-    $("#lamprey-regex").text("/" + regEx + "/");
-    regEx.isMultiline ? $("#lamprey-regex").append("m") : true ;
-    $("#lamprey-html").text(getSelectionHTML({snapToParent: true}));
-    $("#lamprey-matching-groups").html(
+    $("#glean-regex").text("/" + regEx + "/");
+    regEx.isMultiline ? $("#glean-regex").append("m") : true ;
+    $("#glean-html").text(getSelectionHTML({snapToParent: true}));
+    $("#glean-matching-groups").html(
       getSelectionHTML({snapToParent: false})
     );
   }
 }
+
+
+
+function matchWebpage() {
+  var html = document.documentElement.outerHTML;
+  XRegExp(html, new RegExp($("#glean-regex").text()), function(match, i) {
+    alert(match.lastIndex)
+  })
+}
+
+
 
 
 function getSelectionText() {
@@ -74,6 +71,8 @@ function getSelectionText() {
         return document.selection.createRange();
     }
 }
+
+
 
 
 function getSelectionHTML() {
@@ -112,6 +111,40 @@ function getSelectionHTML() {
 }
 
 
+
+
+function registerEvents() {
+  $("#glean-cancel").click(function () {
+    $('#glean').animate({
+        right: '-' + $("#glean").outerWidth()
+      }, 250, function () {
+        $('#glean').remove();
+      });
+  });
+  
+  $("#glean-regex").blur(function () {
+    matchWebpage();
+  });
+  
+  $(document).mouseup(function(event) {
+    if (!$("#glean").has(event.target).length) {
+      checkSelection();
+    }
+  });
+}
+
+
+
+
+function openTray() {
+  $('#glean').animate({
+      right: '0'
+    }, 250);
+}
+
+
+
+
 function getHTMLFromRange(range, trim) {
   var spanNode = range.startContainer.ownerDocument.createElement("layer");
   var docfrag = range.cloneContents();
@@ -122,6 +155,18 @@ function getHTMLFromRange(range, trim) {
   $(spanNode).remove();
   return html;
 }
+
+
+
+
+function resize() {
+  var fixedHeightElementsTotalHeight = 200;
+  var windowHeight = $(window).height();
+  $("#glean-regex").height(windowHeight/2 - fixedHeightElementsTotalHeight);
+  $("#glean-html").height(windowHeight/2 - fixedHeightElementsTotalHeight);
+}
+
+
 
 
 function trimOuterTags(s) {

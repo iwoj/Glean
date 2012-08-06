@@ -2,22 +2,53 @@
 <html>
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-  <title>Lamprey</title>
+  <title>Glean</title>
+  <style type="text/css">
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+  
+  a:hover {
+    color: #888;
+  }
+  
+  #main_div {
+    padding-top: 5px;
+    margin-left: 250px;
+    width: 400px;
+  }
+  
+  #bookmarklet_div {
+    position: absolute;
+    left: 80px;
+  }
+  
+  #bookmarklet_link {
+    color: #44c;
+  }
+  
+  .dotted_link {
+    border-bottom: 1px dotted #ccc;
+  }
+  </style>
 </head>
 <body>
-  <div style="float:left; padding-left:10px; padding-right: 30px; padding-bottom: 200px;">
-    <img style="padding-top:5px; padding-left: 12px; padding-bottom: 20px;" src="up-arrow.jpg"/><br/>
-    <div style="display: inline; background-color: #eee; padding: 10px;"><a href="<%= bookmarkletJavaScriptLink %>">Lamprey</a></div>
+  <div id="bookmarklet_div">
+    <img style="padding-top:20px; padding-left: 20px; padding-bottom: 20px; opacity: 0.10;" src="up-arrow.jpg"/><br/>
+    <div style="background-color: #eee; padding: 10px; width: 75px; text-align: center;"><a href="<%= bookmarkletJavaScriptLink %>" id="bookmarklet_link" class="dotted_link">Glean</a></div>
   </div>
-  <div style="padding-top: 22px;">
-    <br/><br/><br/>
-    <p><b>Lamprey is a system for gleaning data from live websites.</b></p>
-    <p>It uses a bookmarklet to help create and maintain regular expressions.</p>
-    <p>To try it out, click the link to the left. To use it on other websites, drag the link to your bookmarks bar.</p>
-    <p style="font-size: 12px; font-style: italic; opacity: 0.5;"><a href="http://github.com/iwoj/Lamprey">fork me on github</a></p>
+  <div id="main_div">
+    <p><a href="http://en.wikipedia.org/wiki/Gleaning" target="_blank"><img src="millet.jpg"/></a></p>
+    
+    <p><b><i>Glean</i> is a <a href="http://en.wikipedia.org/wiki/Bookmarklet" class="dotted_link" target="_blank">bookmarklet</a> for writing <a href="http://en.wikipedia.org/wiki/Regular_expression" class="dotted_link">regular expressions</a> and collecting live data from websites.</b></p>
+    
+    <p>To try it, click "Glean"</p>
+    
+    <p>To install, just drag the link up to your bookmarks bar.</p>
   </div>
   <div style="position:absolute; top: 0px; right: 0px;">
-    <a href="http://github.com/iwoj/Lamprey"><img src="forkme.png"/></a>
+    <a href="http://github.com/iwoj/Glean"><img src="forkme.png"/></a>
   </div>
 </body>
 </html>

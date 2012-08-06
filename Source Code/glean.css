@@ -1,4 +1,4 @@
-#lamprey {
+#glean {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 12px;
   color: black;
@@ -16,7 +16,7 @@
   padding-left: 10px;
 }
 
-#lamprey-title {
+#glean-title {
   float: left;
   display: inline;
   font-size: 16px;
@@ -25,7 +25,7 @@
   padding-bottom: 10px;
 }
 
-#lamprey-slogan {
+#glean-slogan {
   float: right;
   float: bottom;
   display: inline;
@@ -37,42 +37,42 @@
 }
 
 
-#lamprey-slogan a {
+#glean-slogan a {
   color: #000;
   text-decoration: none;
 }
 
 
 
-#lamprey-instructions {
+#glean-instructions {
   clear: both;
   font-weight: normal;
   color: #f80;
   padding-bottom: 10px;
 }
 
-#lamprey textarea {
+#glean textarea {
   width: 245px;
   margin-bottom: 10px;
 }
 
 
-#lamprey-regex {
+#glean-regex {
   height: 32%;
   background-color: #fff;
 }
 
-#lamprey-html {
+#glean-html {
   height: 32%;
   background-color: #ffc;
 }
 
-#lamprey-matching-groups {
+#glean-matching-groups {
   height: 45px;
   width: 245px;
 }
 
-#lamprey-footer {
+#glean-footer {
   position: absolute;
   bottom: 20px;
   padding: 0px;
@@ -80,7 +80,7 @@
   width: 245px;
 }
 /*
-#lamprey-thoreau {
+#glean-thoreau {
 font-size: 12px;
 font-style: italic;
 font-family: Helvetica, Arial, sans-serif;
@@ -89,11 +89,11 @@ padding-top: 5px;
 display: none;
 }
 */
-#lamprey-buttons {
+#glean-buttons {
   padding-bottom: 10px;
 }
 
-#lamprey button {
+#glean button {
   display: inline;
   margin: 0 7px 0 0;
   background-color: #fd0;
@@ -114,34 +114,34 @@ display: none;
 }
 
 
-#lamprey button[type=submit] {
+#glean button[type=submit] {
   font-weight: bold;
   color: #000;
 }
 
-#lamprey a {
+#glean a {
   color: #000;
   text-decoration: none;
 }
 
-#lamprey a:hover {
+#glean a:hover {
   text-decoration: underline;
 }
 
-#lamprey-heading {
+#glean-heading {
   clear: both;
   font-size: 11px;
   text-transform: uppercase;
   opacity: 0.5;
 }
 
-#lamprey-saved {
+#glean-saved {
   padding-top: 10px;
   font-weight: bold;
   opacity: 0.5;
 }
 
-#lamprey hr {
+#glean hr {
   border: 0px;
   opacity: 0.15;
   background-color: #000;
@@ -149,3 +149,8 @@ display: none;
   width: auto;
 }
 
+
+
+#glean .dotted_link {
+  border-bottom: 1px dotted #ccc;
+}

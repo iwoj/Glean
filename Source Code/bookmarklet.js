@@ -1,8 +1,8 @@
 (function () {
-    var lampreyURL = "<%= baseURL %>";
-    window.Lamprey = window.Lamprey || {};
-    window.Lamprey.bootstrapper = window.Lamprey.bootstrapper || {};
-    window.Lamprey.bootstrapper.loadScripts = function (scriptArray, onComplete) {
+    var gleanURL = "<%= baseURL %>";
+    window.Glean = window.Glean || {};
+    window.Glean.bootstrapper = window.Glean.bootstrapper || {};
+    window.Glean.bootstrapper.loadScripts = function (scriptArray, onComplete) {
         var numberOfLoadedScripts = 0;
         for (var i = 0; i < scriptArray.length; i++) {
             var s = (document.getElementsByTagName('head')[0] || document.body).appendChild(document.createElement('script'));
@@ -16,5 +16,5 @@
             };
         }
     };
-    window.Lamprey.bootstrapper.loadScripts([lampreyURL + "/lamprey.js"], function () {});
+    window.Glean.bootstrapper.loadScripts([gleanURL + "/glean.js"], function () {});
 })()

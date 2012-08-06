@@ -1,7 +1,7 @@
 # Edit these variables for your environment
-PRODUCTION_URL="http://miscellaneousprojects.com/lamprey"
-TESTING_URL="http://miscellaneousprojects.com/lamprey"
+BASE_URL="http://miscellaneousprojects.com/glean"
 BUILD_OUTPUT="Build Products"
+PREFIX="Website"
 
 # Best to leave this alone.
 all:
@@ -11,10 +11,11 @@ all:
 	cp "Source Code/"*.jpg $(BUILD_OUTPUT)
 	cp "Source Code/"*.png $(BUILD_OUTPUT)
 	cp "Source Code/.htaccess" $(BUILD_OUTPUT)
+	cp Libraries/* $(BUILD_OUTPUT)
 	cd Scripts; \
-	node build.js $(TESTING_URL)
+	node build.js $(BASE_URL)
 	
-deploy: all
+install: all
 	mkdir -p $(PREFIX)
 	cp "Build Products/"* $(PREFIX)
 	cp "Build Products/.htaccess" $(PREFIX)
