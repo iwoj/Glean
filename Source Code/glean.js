@@ -1,3 +1,5 @@
+var DEBUG = true;
+
 var baseURL = "<%= baseURL %>";
 
 window.Glean.bootstrapper.loadScripts([
@@ -54,8 +56,8 @@ function checkSelection() {
 
 function matchWebpage() {
   var html = document.documentElement.outerHTML;
-  XRegExp(html, new RegExp($("#glean-regex").text()), function(match, i) {
-    alert(match.lastIndex)
+  XRegExp.forEach(html, new RegExp(trimSlashes($("#glean-regex").text())), function(match, i) {
+    if (DEBUG) console.log(match.index)
   })
 }
 
@@ -167,6 +169,12 @@ function resize() {
 }
 
 
+
+function trimSlashes(s) {
+  s = s.replace(/^\//, "");
+  s = s.replace(/\/$/, "");
+  return s;
+}
 
 
 function trimOuterTags(s) {
