@@ -1,7 +1,6 @@
 # Edit these variables for your environment
-PRODUCTION_URL="http://woj.com/lamprey"
-TESTING_URL="http://woj/lamprey"
-DEPLOYMENT_DIR="Website"
+PRODUCTION_URL="http://miscellaneousprojects.com/lamprey"
+TESTING_URL="http://miscellaneousprojects.com/lamprey"
 BUILD_OUTPUT="Build Products"
 
 # Best to leave this alone.
@@ -10,23 +9,22 @@ all:
 	cp "Source Code/"*.css $(BUILD_OUTPUT)
 	cp "Source Code/"*.html $(BUILD_OUTPUT)
 	cp "Source Code/"*.jpg $(BUILD_OUTPUT)
+	cp "Source Code/"*.png $(BUILD_OUTPUT)
 	cp "Source Code/.htaccess" $(BUILD_OUTPUT)
 	cd Scripts; \
 	node build.js $(TESTING_URL)
 	
 deploy: all
-	mkdir -p $(DEPLOYMENT_DIR)
-	cp "Build Products/"* $(DEPLOYMENT_DIR)
-	cp "Build Products/.htaccess" $(DEPLOYMENT_DIR)
-	cp Libraries/* $(DEPLOYMENT_DIR)
-	cd $(DEPLOYMENT_DIR); \
-	ln -s -f bookmarklet.html index.html
+	mkdir -p $(PREFIX)
+	cp "Build Products/"* $(PREFIX)
+	cp "Build Products/.htaccess" $(PREFIX)
+	cp Libraries/* $(PREFIX)
 
 clean:
 	rm -rf $(BUILD_OUTPUT)/*
 	rm -rf $(BUILD_OUTPUT)/.htaccess
 
 clean-deployment:
-	rm -rf $(DEPLOYMENT_DIR)/*
-	rm -rf $(DEPLOYMENT_DIR)/.htaccess
+	rm -rf $(PREFIX)/*
+	rm -rf $(PREFIX)/.htaccess
 

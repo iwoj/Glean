@@ -1,6 +1,6 @@
 Lamprey
 =======
 
-Lamprey is a [bookmarklet](https://en.wikipedia.org/wiki/Bookmarklet) for creating and maintaining regular expressions on live websites.
+Lamprey is a [bookmarklet](https://en.wikipedia.org/wiki/Bookmarklet) system for creating and maintaining regular expressions connected to live websites.
 
-Visit the [Lamprey Website](http://wojtowicz.com/lamprey) for a demo.
+Visit the [Lamprey Website](http://miscellaneousprojects.com/lamprey) for more info.
