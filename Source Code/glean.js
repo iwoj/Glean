@@ -57,16 +57,16 @@ function checkSelection() {
 function matchWebpage() {
   var html = document.documentElement.outerHTML;
   XRegExp.forEach(html, new RegExp(trimSlashes($("#glean-regex").text())), function(match, i) {
-    if (DEBUG) console.log(match.index)
     
     var gleanStartIndex = html.indexOf('<div id="glean"')
     var gleanEndIndex = gleanStartIndex + $("#glean")[0].outerHTML.length
     
-    if (DEBUG) console.log("gleanStartIndex: " + gleanStartIndex)
-    if (DEBUG) console.log("gleanEndIndex: " + gleanEndIndex)
-    
     if (match.index < gleanStartIndex || match.index > gleanEndIndex) {
-      alert(match.index)
+      if (DEBUG) console.log("match.index: " + match.index)
+      if (DEBUG) console.log("gleanStartIndex: " + gleanStartIndex)
+      if (DEBUG) console.log("gleanEndIndex: " + gleanEndIndex)
+      //alert(match.index)
+      setSelection(match.index, match.index + match[0].length)
     }
        // http://stackoverflow.com/questions/4183401/can-you-set-and-or-change-the-users-text-selection-in-javascript
        // http://xregexp.com/api/
@@ -80,6 +80,9 @@ function setSelection(startIndex, endIndex) {
   // same for end index
   // setselection, appending the selection range to previous select ranges, if any exist
   
+  var range = document.createRange();
+  range.setStart(document.getElementByOffset(startIndex), startIndex);
+  range.setEnd(document.getElementByOffset(endIndex), endIndex);
   
     // if (window.getSelection && document.createRange) {
     //     var sel = window.getSelection();
@@ -213,6 +216,23 @@ function trimOuterTags(s) {
   s = s.replace(/^(<[^>]*>)/, "");
   s = s.replace(/(<[^>]*>)$/, "");
   return s;
+}
+
+
+document.getElementByOffset = function(targetOffset) {
+  // traverse DOM tree
+  function searchDOM (element, currentOffset) {
+    if (targetOffset > currentOffset && targetOffset < currentOffset + element.outerHTML.length) {
+      for(var i = 0; i < element.children.length; i++) {
+        var nextElementOffset = element.outerHTML.indexOf(element.children[i].outerHTML);
+        var nextElementLength = element.children[i].outerHTML.length;
+        if (targetOffset > currentOffset + nextElementOffset && targetOffset < currentOffset + nextElementOffset + nextElementLength)
+          return arguments.callee(element.children[i], currentOffset+nextElementOffset);
+      }
+      return element
+    }
+  }
+  return searchDOM(document.all[0], 0, targetOffset)
 }
 
 
