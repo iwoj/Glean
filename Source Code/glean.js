@@ -58,16 +58,41 @@ function matchWebpage() {
   var html = document.documentElement.outerHTML;
   XRegExp.forEach(html, new RegExp(trimSlashes($("#glean-regex").text())), function(match, i) {
     if (DEBUG) console.log(match.index)
-    // Given the starting point (match.index), is this inside Glean's HTML?
-    // if yes:
-       // do nothing.
-    // else:
-       // translate the math.index to a selection range
-       // append the selection range to previous select ranges, if any exist
-       // set the selection.
+    
+    var gleanStartIndex = html.indexOf('<div id="glean"')
+    var gleanEndIndex = gleanStartIndex + $("#glean")[0].outerHTML.length
+    
+    if (DEBUG) console.log("gleanStartIndex: " + gleanStartIndex)
+    if (DEBUG) console.log("gleanEndIndex: " + gleanEndIndex)
+    
+    if (match.index < gleanStartIndex || match.index > gleanEndIndex) {
+      alert(match.index)
+    }
+       // http://stackoverflow.com/questions/4183401/can-you-set-and-or-change-the-users-text-selection-in-javascript
+       // http://xregexp.com/api/
   })
 }
 
+
+function setSelection(startIndex, endIndex) {
+  // find element in startIndex
+  // determine offset
+  // same for end index
+  // setselection, appending the selection range to previous select ranges, if any exist
+  
+  
+    // if (window.getSelection && document.createRange) {
+    //     var sel = window.getSelection();
+    //     var range = document.createRange();
+    //     range.selectNodeContents(el);
+    //     sel.removeAllRanges();
+    //     sel.addRange(range);
+    // } else if (document.selection && document.body.createTextRange) {
+    //     var textRange = document.body.createTextRange();
+    //     textRange.moveToElementText(el);
+    //     textRange.select();
+    // }
+}
 
 
 
