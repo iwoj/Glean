@@ -150,5 +150,11 @@ display: none;
   width: auto;
 }
 
+#glean p {
+  line-height: 120%;
+}
 
+.glean-highlight {
+  background-color: yellow;
+}
 
