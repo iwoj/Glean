@@ -121,6 +121,9 @@ function addHighlights(html, ranges) {
   for (var j = 0; j < ranges.length; j++) {
     var middleSegment = html.slice(ranges[j][0], ranges[j][1]);
     
+    if ($("body")[0].offsetIsInsideTag(ranges[j][0]) || $("body")[0].offsetIsInsideTag(ranges[j][1]))
+      if (DEBUG) console.log("This pattern crosses into a tag.")
+      
     // The length of the HTML file changes as highlights are added, so we need this offset.
     
     var middleSegmentOffset = 0;
@@ -219,7 +222,7 @@ function registerEvents() {
   });
   
   $("#glean-regex").keyup(function (event) {
-    var ignoreKeys = [37, 38, 39, 40];
+    var ignoreKeys = [37, 38, 39, 40, 9, 20, 16, 17, 18, 91, 93];
     if (ignoreKeys.indexOf(event.which) == -1)
       matchWebpage();
   });
@@ -302,9 +305,31 @@ function selectElement(element, element2) {
     }
 }
 
+Element.prototype.offsetIsInsideTag = function(targetOffset) {
+  // traverse DOM tree
+  function searchDOM (element, currentOffset) {
+    if (targetOffset > currentOffset && targetOffset < currentOffset + element.outerHTML.length) {
+      var tags = element.outerHTML.replace(">"+element.innerHTML+"<", ">><<").split("><");
+      
+      if (targetOffset < currentOffset + tags[0].length || targetOffset > currentOffset + tags[0].length + element.innerHTML.length)
+        return true;
+      
+      for(var i = 0; i < element.children.length; i++) {
+        var nextElement = element.children[i];
+        var nextElementOffset = element.outerHTML.indexOf(nextElement.outerHTML);
+        var nextElementLength = nextElement.outerHTML.length;
+        if (targetOffset > currentOffset + nextElementOffset && targetOffset < currentOffset + nextElementOffset + nextElementLength) {
+          return arguments.callee(nextElement, currentOffset + nextElementOffset);
+        }
+      }
+      
+      return false;
+    }
+  }
+  return searchDOM(this, 0)
+}
 
-
-document.getElementByOffset = function(targetOffset) {
+Element.prototype.getElementByOffset = function(targetOffset) {
   // traverse DOM tree
   function searchDOM (element, currentOffset) {
     if (targetOffset > currentOffset && targetOffset < currentOffset + element.outerHTML.length) {
@@ -317,7 +342,7 @@ document.getElementByOffset = function(targetOffset) {
       return element
     }
   }
-  return searchDOM(document.all[0], 0, targetOffset)
+  return searchDOM(this, 0)
 }
 
 String.prototype.regexIndexOf = function(regex, startpos) {
