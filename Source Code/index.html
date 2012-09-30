@@ -1,56 +1,61 @@
 <!DOCTYPE html>
 <html>
 	<head>
-  		<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-  		<title>Glean</title>
-  		<style type="text/css">
+  	<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+  	<title>Glean</title>
+  	<style type="text/css">
 
-	  		body {
-	      		margin: 0px;
-	      		padding: 0px;
-	      		background-image: url("millet.jpg");
-	      		background-repeat:repeat-y;
-	      		background-attachment:fixed;
-	      		background-size:cover;
-	      		overflow: hidden;
-	  		}
+	  	body {
+	      margin: 0px;
+	      padding: 0px;
+	      background-image: url("millet.jpg");
+	      background-repeat:repeat-y;
+	      background-attachment:fixed;
+	      background-size:cover;
+	      overflow: hidden;
+	  	}
 
 			a {
-    			text-decoration: none;
-    	  		color: #000;
+    		text-decoration: none;
+    	  color: #000;
 				transition: opacity 0.25s;
 				-webkit-transition: opacity 0.25s; 
-  	  		}
+  	  }
 
-  			a:hover {
-    			opacity: 0.5;
-  			}
-			
+  		a:hover {
+    		opacity: 0.5;
+  		}
+
 			p {
 				padding: 0px;
 				margin: 10px;
 			}
-  			
-			#main-div {
-    			padding-top: 25px;
-    			margin-left: 250px;
-    			width: 550px;
-    			font-size: 18px;
-  			}
 
-  			#bookmarklet-div {
-    			position: absolute;
-    			left: 80px;
-  			}
+	    p b {
+	      font-size: 120%;
+	    }
 
-  			a#bookmarklet-link {
-    			color: #44c;
-  			}
+			#description {
+    		padding-top: 0px;
+    		margin-left: 160px;
+    		width: 550px;
+    		font-size: 18px;
+  		}
+
+  		#bookmarklet-div {
+    		position: absolute;
+    		top: 0px;
+    		left: 750px;
+  		}
+
+  		a#bookmarklet-link {
+    		color: #44c;
+  		}
 
 
-  			.dotted_link {
-    			border-bottom: 1px dotted #666;
-  			}
+  		.dotted_link {
+    		border-bottom: 1px dotted #666;
+  		}
 
 			#image-credit {
 				position: absolute;
@@ -58,34 +63,33 @@
 				right: 25px;
 				text-align:right;
 				color: white;
-				opacity: 0.15;
+				opacity: 0.33;
 				cursor: pointer;
 				transition: opacity 0.25s;
 				-webkit-transition: opacity 0.25s; 
 			}
 
 			#image-credit:hover {
-				opacity: 0.5;
+				opacity: 0.66;
 			}
-  		</style>
+  	</style>
 	</head>
 	<body>
-  		<!-- 604 815 0169 -->
-  		<div id="bookmarklet-div">
-    		<img style="padding-top: 10px; padding-left: 30px; padding-bottom: 10px; opacity: 0.25;" src="up-arrow.png"/><br/>
-    		<div style="background-color: rgba(255, 255, 255, 0.5); padding: 10px; width: 75px; text-align: center;"><a href="<%= bookmarkletJavaScriptLink %>" id="bookmarklet-link" class="dotted_link">Glean</a></div>
-  		</div>
-  		<div id="main-div">
-    		<p><b><i>Glean</i> is a <a href="http://en.wikipedia.org/wiki/Bookmarklet" class="dotted_link" target="_blank">bookmarklet</a> for writing <a href="http://en.wikipedia.org/wiki/Regular_expression" class="dotted_link">regular expressions</a> to help you collect live data from websites.</b></p>
+  	<div id="bookmarklet-div">
+    	<img style="padding-top: 10px; padding-left: 30px; padding-bottom: 10px; opacity: 0.25;" src="up-arrow.png"/><br/>
+    	<div style="font-size: 20px; background-color: rgba(0, 0, 0, 0.1); padding: 10px; width: 75px; text-align: center;"><a href="<%= bookmarkletJavaScriptLink %>" id="bookmarklet-link" class="dotted_link">Glean</a></div>
+  	</div>
+  	<div id="description">
+    	<p><b><i>Glean</i> is a <a href="http://en.wikipedia.org/wiki/Bookmarklet" class="dotted_link" target="_blank">bookmarklet</a> for writing <a href="http://en.wikipedia.org/wiki/Regular_expression" target="_blank" class="dotted_link">regular expressions</a> on live websites. <span style="opacity: 0.5; font-weight:normal;">It helps you collect data and adjust quickly to formatting changes.</span></b></p>
 
-    		<p>For a demo, click the blue link to the left. To install, drag the link up to your bookmarks bar.</p>
-  		</div>
-  		<div style="position:absolute; top: 0px; right: 0px;">
-    		<a href="http://github.com/iwoj/Glean" target="_blank"><img src="forkme.png"/></a>
-  		</div>
-  		<div id="image-credit" onclick="window.open('http://en.wikipedia.org/wiki/Gleaning','_blank')">
-  		    <i>The Gleaners</i>, 1857<br/>
-  		    Jean-François Millet
+    	<p style="opacity: 0.5;">For a demo, click the blue link to the right.<br/>To install, drag the blue link up to your bookmarks bar.</p>
+  	</div>
+  	<div style="position:absolute; top: 0px; left: 0px;">
+    	<a href="http://github.com/iwoj/Glean" target="_blank"><img src="forkme.png"/></a>
+  	</div>
+  	<div id="image-credit" onclick="window.open('http://en.wikipedia.org/wiki/Gleaning','_blank')">
+  		<i>The Gleaners</i>, 1857<br/>
+  		Jean-François Millet
 		</div>
 	</body>
 </html>
