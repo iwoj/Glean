@@ -155,6 +155,6 @@ display: none;
 }
 
 .glean-highlight {
-  background-color: #ccffff;
+  background-color: rgba(200,255,255,0.5);
 }
 

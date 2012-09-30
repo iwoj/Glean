@@ -259,6 +259,7 @@ function closeTray() {
     }, 250, function () {
         $('#glean').remove();
     });
+	$("body").html(removeHighlights($("body").html()));
 }
 
 
