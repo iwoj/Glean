@@ -115,14 +115,69 @@ function removeHighlights(html) {
 }
 
 
+function sortRanges(ranges) {
+  // Insertion Sort
+  for (var j = 1; j < ranges.length; j++) {
+    var key = ranges[j];
+    var i = j - 1;
+    // Shift everything over, if necessary
+    while (i > 0 && ranges[i] > key) {
+      ranges[i+1] = ranges[i];
+      i = i - 1;
+    }
+    ranges[i+1] = key;
+  }
+}
+
+
+function mergeOverlappingRanges(ranges) {
+  var mergedRanges = ranges;
+  var n = 0;
+
+  for (var i = 1; i < mergeRanges.length; i++) {
+    if (mergeRanges[i][0] > mergeRanges[n][1] + 1)
+      n = i;
+    else {
+      if (mergeRanges[n][1] < mergeRanges[i][1]);
+        mergeRanges[n][1] = mergeRanges[i][1];
+      mergeRanges.splice(i,1);
+      i--; // Compensate for changed array length.
+    }
+  }  
+  
+  return mergedRanges;
+  /* Solution in PHP:
+   * 
+   * usort($data, function($a, $b)
+   * {
+   *    return $a[0] - $b[0];
+   * });
+   *
+   * $n = 0; $len = count($data);
+   * for ($i = 1; $i < $len; ++$i)
+   * {
+   *   if ($data[$i][0] > $data[$n][1] + 1)
+   *     $n = $i;
+   *   else
+   *   {
+   *     if ($data[$n][1] < $data[$i][1])
+   *     $data[$n][1] = $data[$i][1];
+   *     unset($data[$i]);
+   *   }
+   * }
+   *
+   * $data = array_values($data);
+   */
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // 
 // This is all fucked up and needs to be rewritten.
 // 
 // Rewrite:
 //
-// 1. merge overlaps in ranges
-// 2. sort resulting ranges
+// 1. sort resulting ranges
+// 2. merge overlaps in ranges
 // 3. loop over ranges:
 //    4. is the start range inside a chunk of visible text?
 //       yes: go to 5
@@ -135,8 +190,11 @@ function removeHighlights(html) {
 //    8. insert closeTag
 //    9. adjust following ranges, offsetting them by the length of the two tags, if the range was > length 0
 //
-//
+
 function addHighlights(html, ranges) {
+  ranges = sortRanges(ranges);
+  ranges = mergeOverlappingRanges(ranges);
+  
   var openTag = "<span class=\"glean-highlight\">";
   var closeTag = "</span>";
   var tagLength = (openTag.length + closeTag.length);
