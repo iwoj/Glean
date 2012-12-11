@@ -1,6 +1,7 @@
 var DEBUG = true;
 
 var baseURL = "<%= baseURL %>";
+var mouseDownTarget = null;
 
 window.Glean.bootstrapper.loadScripts([
     baseURL + "/jquery.min.js",
@@ -61,6 +62,7 @@ function checkSelection() {
 
 function matchWebpage() {
   var html = removeHighlights($("body").html());
+
   // We've got to do this because the textfield value isn't in jQuery's DOM
   html = html.replace(/<textarea id="glean-regex">.*?<\/textarea>/, "<textarea id=\"glean-regex\">" + $("#glean-regex").val() + "</textarea>");
 
@@ -116,17 +118,21 @@ function removeHighlights(html) {
 
 
 function sortRanges(ranges) {
-  // Insertion Sort
-  for (var j = 1; j < ranges.length; j++) {
-    var key = ranges[j];
-    var i = j - 1;
-    // Shift everything over, if necessary
-    while (i > 0 && ranges[i] > key) {
-      ranges[i+1] = ranges[i];
-      i = i - 1;
+  if (ranges.length > 1) 
+  {
+    // Insertion Sort
+    for (var j = 1; j < ranges.length; j++) {
+      var key = ranges[j];
+      var i = j - 1;
+      // Shift everything over, if necessary
+      while (i > 0 && ranges[i] > key) {
+        ranges[i+1] = ranges[i];
+        i = i - 1;
+      }
+      ranges[i+1] = key;
     }
-    ranges[i+1] = key;
   }
+  return ranges;
 }
 
 
@@ -134,17 +140,17 @@ function mergeOverlappingRanges(ranges) {
   var mergedRanges = ranges;
   var n = 0;
 
-  for (var i = 1; i < mergeRanges.length; i++) {
-    if (mergeRanges[i][0] > mergeRanges[n][1] + 1)
+  for (var i = 1; i < mergedRanges.length; i++) {
+    if (mergedRanges[i][0] > mergedRanges[n][1] + 1)
       n = i;
     else {
-      if (mergeRanges[n][1] < mergeRanges[i][1]);
-        mergeRanges[n][1] = mergeRanges[i][1];
-      mergeRanges.splice(i,1);
+      if (mergedRanges[n][1] < mergedRanges[i][1]);
+      mergedRanges[n][1] = mergedRanges[i][1];
+      mergedRanges.splice(i,1);
       i--; // Compensate for changed array length.
     }
   }  
-  
+
   return mergedRanges;
   /* Solution in PHP:
    * 
@@ -194,7 +200,7 @@ function mergeOverlappingRanges(ranges) {
 function addHighlights(html, ranges) {
   ranges = sortRanges(ranges);
   ranges = mergeOverlappingRanges(ranges);
-  
+
   var openTag = "<span class=\"glean-highlight\">";
   var closeTag = "</span>";
   var tagLength = (openTag.length + closeTag.length);
@@ -306,18 +312,20 @@ function registerEvents() {
   $("#glean-regex").keyup(function (event) {
     var ignoreKeys = [37, 38, 39, 40, 9, 20, 16, 17, 18, 91, 93];
     if (ignoreKeys.indexOf(event.which) == -1)
+    $("#glean-html").val(" ");
     matchWebpage();
   });
 
   // Removal of highlights need to happen after the selection is made.
   // This will require some basic arithmetic, if you're up for it.
   $(document).mousedown(function(event) {
+    mouseDownTarget = event.target;
     if (!document.getElementById("glean").contains(event.target))
     $("body").html(removeHighlights($("body").html()));
   });
 
   $(document).mouseup(function(event) {
-    if (!$("#glean").has(event.target).length) {
+    if (!$("#glean").has(mouseDownTarget).length && mouseDownTarget != $("#glean")[0]) {
       checkSelection();
       matchWebpage();
     }
