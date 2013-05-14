@@ -216,7 +216,7 @@ function addHighlights(html, ranges) {
 
     var middleSegmentOffset = 0;
 
-    if (isUnspannable(middleSegment)) {
+    if (!isSpannable(middleSegment)) {
       var segmentArray = findSpannableSegments(middleSegment);
       middleSegment = addHighlights(middleSegment, segmentArray);
       middleSegmentOffset = tagLength * segmentArray.length;
@@ -252,8 +252,8 @@ function findSpannableSegments(html) {
 
 
 
-function isUnspannable(middleSegment) {
-  return new RegExp(unspannableTagsRegExp(), "i").test(middleSegment);
+function isSpannable(middleSegment) {
+  return ! new RegExp(unspannableTagsRegExp(), "i").test(middleSegment);
 }
 
 
