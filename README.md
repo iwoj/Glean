@@ -18,5 +18,7 @@ Visit the [website](http://miscellaneousprojects.com/glean) for more info.
 
 TODO
 ----
-- Integrate Rangey
-
+- Merge with these borg ships:
+  - Rangey
+  - http://mashajs.com/index_eng.html
+  - https://www.squarefree.com/bookmarklets/pagedata.html#highlight_regexp
